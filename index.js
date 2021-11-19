@@ -13,7 +13,6 @@ app.use(express.json())
 
 const uri = `mongodb+srv://${process.env.DB_PASS}:${process.env.DB_USER}@cluster0.pardn.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 
-
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 async function run() {
@@ -25,7 +24,6 @@ async function run() {
 
       const usersCollection = database.collection("users");
 
-
       // GET API
       app.get('/products',async(req,res)=>{
         const cursor = productsCollection.find({});
@@ -36,7 +34,6 @@ async function run() {
       // GET SINGLE PRODUCT
       app.get('/products/:id',async(req,res)=>{
         const id = req.params.id;
-        console.log('getting service',id)
         const query ={_id: ObjectId(id)}
         const product = await productsCollection.findOne(query);
         res.json(product)
