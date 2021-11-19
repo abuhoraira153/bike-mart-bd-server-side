@@ -53,9 +53,19 @@ async function run() {
           
       })
 
+      app.get('/users/:email',async(req,res)=>{
+        const email = req.params.email;
+        const query = {email: email};
+        const user = await usersCollection.findOne(query);
+        let isAdmin = false;
+        if(user?.role === 'admin'){
+          isAdmin = true
+        }
+        res.json({admin: isAdmin})
+      })
+
       app.post('/users',async(req,res)=>{
         const user = req.body;
-        console.log("user",user)
         const result = await usersCollection.insertOne(user);
         console.log(result)
         res.json(result)
@@ -82,5 +92,5 @@ app.get('/',(req,res)=>{
 })
 
 app.listen(port,()=>{
-    console.log('Running bike mart Server on port',port)
-});
+    console.log('Running bike mart SerVer on port',port)
+})
