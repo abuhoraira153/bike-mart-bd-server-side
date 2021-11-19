@@ -53,12 +53,13 @@ async function run() {
           
       })
 
-      // app.post('/users',async(req,res)=>{
-      //   const user = req.body;
-      //   const result = await usersCollection.insertOne(user);
-      //   console.log(result)
-      //   res.json(result)
-      // })
+      app.post('/users',async(req,res)=>{
+        const user = req.body;
+        console.log("user",user)
+        const result = await usersCollection.insertOne(user);
+        console.log(result)
+        res.json(result)
+      })
 
       app.put('/users/admin', async(req,res)=>{
         const user = req.body;
@@ -81,5 +82,5 @@ app.get('/',(req,res)=>{
 })
 
 app.listen(port,()=>{
-    console.log('Running bike mart SerVer on port',port)
+    console.log('Running bike mart Server on port',port)
 })
